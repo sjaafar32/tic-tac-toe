@@ -1,0 +1,33 @@
+:root {
+    --display: block;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.players-info {
+    height: 250px;
+    width: 200px;
+    border-style: solid;
+    display: var(--display);
+}
+
+#game-board-container {
+    display: grid;
+    background-color: black;
+    width: 16rem;
+    height: 16rem;
+    grid-template-rows: repeat(3, 5.5rem);
+    grid-template-columns: repeat(3, 5.5rem);
+}
+
+.cell {
+    width: 5rem;
+    height: 5rem;
+    background-color: rgb(228, 228, 228);
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
