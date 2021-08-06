@@ -1,7 +1,5 @@
 const gameBoardContainer = document.getElementById('game-board-container');
 const resetBtn = document.getElementById('reset-button');
-const playerOneName = document.getElementById('player-one');
-const playerTwoName = document.getElementById('player-two');
 const submitBtn = document.getElementById('submit-button');
 
 let boardArray;
@@ -10,14 +8,17 @@ let newCell; //This variable is global so it can be used within the functions an
 let playerOne;
 let playerTwo;
 
-const gamePlay = () => {
-    const createPlayer = (name, marker) => {
-        const playerName = () => {return name;}
-        const playerMarker = () => {return marker;}
-        return {playerName, playerMarker}
-    }
-    return {createPlayer}
-};
+let playerOneName;
+let playerTwoName;
+
+const createPlayer = (name, marker) => {
+    const playerName = () => name;
+    const playerMarker = () => marker;
+    return {playerName, playerMarker}
+}
+
+
+
 
 const gameBoard = (() => {
     const createBoard = () => { 
@@ -29,7 +30,6 @@ const gameBoard = (() => {
             newCell.cellButton();       
         }
     }
-    
     const resetBoard = (arrayToDelete) => { 
         //This replaces whatever text is in the sqaures with an empty string
         for(i=0; i<9; i++) {
@@ -39,24 +39,44 @@ const gameBoard = (() => {
     return {createBoard, resetBoard};
 })();
 
+
+
+
+
 resetBtn.addEventListener('click', () => {
+    turn = 0;
     boardArray = newCell.returnArray(); 
     //need to get the array from the node list in "createCell" since thats where it was created
     gameBoard.resetBoard(boardArray);
  });
+
+
+
+
+
+ submitBtn.addEventListener('click', () => {
+    playerOneName = document.getElementById('player-one').value;
+    playerTwoName = document.getElementById('player-two').value;
+
+    if(playerOneName == '' || playerTwoName == ''){alert('Do not leave fields blank');}
+
+    playerOne = createPlayer(playerOneName, 'X');
+    playerTwo = createPlayer(playerTwoName, 'O');
+});
+
+
+
+
+
 
 const createCell = () => { //This function is called 9 times in the loop above for each square
     const newCell = document.createElement('div');
     newCell.classList.add('cell');
     gameBoardContainer.appendChild(newCell);
 
-    playerOne = gamePlay();
-    playerOne.createPlayer('Player One', 'X');
-
     const cellButton = () => {
         newCell.addEventListener('click', () => {
-            newCell.textContent = 'X';
-            console.log(playerOne.playerMarker());
+            newCell.textContent = gamePlay();
         });
     };
 
@@ -67,95 +87,30 @@ const createCell = () => { //This function is called 9 times in the loop above f
         }
         return newArray;
     }
-    
     return{cellButton, returnArray};
 };
 
-gameBoard.createBoard();
 
 
-/* const gameBoardContainer = document.getElementById('game-board-container');
-gameBoardContainer.classList.add('game-board-container');
-
-
-const submitBtn = document.getElementById('submit-button');
-const resetBtn = document.getElementById('reset-button');
-
-const player = (name, playerMarker) => {
-    const playerName = () => {return name;}
-    const marker = () => {return playerMarker;}
-    return {playerName, marker};
-}
-
-const gamePlay = (cell) => {
-    let playerOne = player('Player One', 'X');
-    let palyerTwo = player('Player Two', 'O');
-    let turn = 1;
-    let text = cell.innerText;
-    cell.addEventListener('click', () => {
-        cell.set
-    });
-
-    const marker = () => {
-        
-    }
-
-    const playerTurn = () => {
-        if(turn %2 === 0){ turn++; return 'O';}
-        else{turn++; return 'X';}
-    }
-}
-
-const gameBoard = (() => {
-    const createBoard = () => {
-    for(i=0; i<9; i++){
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        gameBoardContainer.appendChild(cell);
-        gamePlay(cell);
-    };
-};
-
-    const resetBoard = () => {
-        const gameBoardArray = Array.from(gameBoardContainer.childNodes)
-        gameBoardArray.forEach((element) => {
-            gameBoardContainer.removeChild(element);
-        });
-    };
-    return {createBoard, resetBoard}
-})();
 
 gameBoard.createBoard();
-let gameBoardArray = Array.from(gameBoardContainer.childNodes);
-console.log(gameBoardArray);
 
-resetBtn.addEventListener('click', () => { gameBoard.resetBoard(); gameBoard.createBoard();});
 
-*/
-//let playerOne;
-//let playerTwo;
+let turn = 0
 
-/*
-const gamePlay = ((cell) => {
-    submitBtn.addEventListener('click', () => {
-        let playerOneName = document.getElementById('player-one');
-        let playerTwoName = document.getElementById('player-two');
-        playerOne = player(playerOneName.value, 'X');
-        playerTwo = player(playerTwoName.value, 'O');
-        console.log(playerTwo.playerName());
-    });
-    let turn = 1;
-    
-    const whosTurn = () => {
-        if(turn % 2 === 0){ return 'X';}
-        else{return 'O';}
-        turn++;
-    }
+const gamePlay = () => {
+    if(turn === 9){return;}
+    if(turn % 2 === 0){ turn++; return playerOne.playerMarker();}
+    else {turn++; return playerTwo.playerMarker();}
 
-    for(i=0; i<9; i++){
-        
-    }
-    
-})();
-
-*/
+    const winPositions = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
+}
