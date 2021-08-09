@@ -125,7 +125,7 @@ html {
     font-family: arial;
     font-size: 3rem;
     color: rgb(126, 126, 126);
-    transform: translate(0%, 950%);
+    margin-top: 25%;
     z-index: 1;
 }
 
@@ -134,6 +134,7 @@ html {
     font-size: 3rem;
     font-family: arial;
     color: gray;
-    transform: translate(1750%, 700%);
+    float: right;
+    margin-right: 1.5rem;
     z-index: 1;
 }
