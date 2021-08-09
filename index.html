@@ -6,17 +6,27 @@
     <body>
         <script src="script.js" defer></script>
         <main>
-            <div class="players-info">
-                <form>
-                    <div>Enter Player 1's Name</div>
+            <div class="overlay"></div>
+            <div style="display: flex; justify-content: center;">
+                <div id="x-button">x</div>
+                <div id="winner-text"></div>
+                <div id="winner-display"></div>
+            </div>
+            <div>
+                <form class="players-info-container">
+                    <div style="font-family: arial; font-size: 3rem; font-weight: bold; color: rgb(126, 126, 126);">Enter Player 1's Name</div>
                     <input id = "player-one" type="text" placeholder="Player 1 Name">
-                    <div>Enter Player 2's Name</div>
+                    <div style="font-family: arial; font-size: 3rem; font-weight: bold; color: rgb(126, 126, 126);">Enter Player 2's Name</div>
                     <input id = "player-two" type="text" placeholder="Player 2 Name">
-                    <button id = "submit-button" type="button">Submit</button>
+                    <div>
+                        <button class = "button" id = "submit-button" type="button" style="margin-right: 2rem;">Submit</button>
+                        <button class= "button" id = "reset-button" type="button">Restart</button>
+                    </div>
                 </form>
             </div>
-            <button id = "reset-button" type="button">Reset</button>
-            <div id="game-board-container"></div>
+            <div class = "center-container">
+                <div id="game-board-container"></div>
+            </div>
         </main>
     </body>
 </html>
