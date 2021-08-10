@@ -73,7 +73,7 @@ resetBtn.addEventListener('click', reset);
     playerOneName = document.getElementById('player-one').value;
     playerTwoName = document.getElementById('player-two').value;
 
-    if(playerOneName == '' || playerTwoName == ''){alert('Do not leave any of the fields blank');}
+    if(playerOneName == '' || playerTwoName == ''){alert(`Do not leave either player's name blank`);}
 
     playerOne = createPlayer(playerOneName, 'X');
     playerTwo = createPlayer(playerTwoName, 'O');
@@ -104,7 +104,7 @@ const createCell = () => { //This function is called 9 times in the loop above f
             if(turn === 0 && 
                 (playerOne.playerName() == ''|| 
                 playerTwo.playerName() == '')){
-                    alert('Do not leave any of the fields blank');
+                    alert(`Do not leave either player's name blank`);
                     return;
                 }
             if(newCell.textContent == ''){  //this if statement prevents a user from changing a marker that's already placed
